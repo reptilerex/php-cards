@@ -9,6 +9,7 @@ namespace PHPCards;
  */
 use PHPCards\Interfaces\CardInterface;
 use PHPCards\Exceptions\PHPCardsException;
+use PHPCards\Player;
 
 class Deck
 {
@@ -17,6 +18,12 @@ class Deck
 	 * @var	array
 	 */
 	protected $_aCards = array();
+	
+	/**
+	 * Deck shuffled state
+	 * @var	boolean
+	 */
+	protected $bShuffled = false;
 	
 // --------------------------------------------------------------------
 	
@@ -51,6 +58,49 @@ class Deck
 // --------------------------------------------------------------------
 	
 	/**
+	 * Method dealCards();
+	 * 
+	 * Method is giving cards to player, you can
+	 * define how many cards it should gave player
+	 * and you must define player object where the
+	 * cards are sending, method is also validating
+	 * shuffle state, and number of cards in deck
+	 * so you can't gave more cards to player than
+	 * you have in your deck, each of card selected
+	 * for player is removed from deck by array_values
+	 * to make array keys nice
+	 * 
+	 * @access	public
+	 * @param	integer	$iCards	How many cards to give
+	 * @param	object	$oPlayer	Object of player
+	 * @return	object	Object of deck
+	 * @throws	PHPCardsException
+	 */
+	public function dealCards($iCards, Player $oPlayer)
+	{
+		if ($this->_bShuffled === false) {
+			throw new PHPCardsException('You must shuffle cards before dealing it');
+		}
+		if (!is_object($oPlayer) || !method_exists($oPlayer, 'setCards')) {
+			throw new PHPCardsException('Invalid player object');
+		}
+		if ($this->getCardsAmount() < $iCards) {
+			throw new PHPCardsException('You cannot give more cards than is in deck');
+		}
+		
+		$aCards = array();
+		for ($i = 0; $i <= $iCards-1; $i++) {
+			$aCards[] = $this->_aCards[$i];
+			unset($this->_aCards[$i]);
+		}
+		$this->_aCards = array_values($this->_aCards);
+		$oPlayer->setCards($aCards);
+		return $this;
+	}//end of dealCards() method
+	
+// --------------------------------------------------------------------
+	
+	/**
 	 * Method shuffle();
 	 * 
 	 * Method is shuffling deck of cards to
@@ -65,6 +115,7 @@ class Deck
 	 */
 	public function shuffle()
 	{
+		$this->_bShuffled = true;
 		return shuffle($this->_aCards);
 	}//end of shuffle() method
 	
