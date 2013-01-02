@@ -22,7 +22,41 @@ namespace PHPCards\Interfaces;
  * @since		01.01.2013
  * @version		1.0 <01.01.2013>
  */
-interface CardInterface {
+interface CardInterface
+{		
+	/**
+	 * Method setSuit();
+	 * 
+	 * Method is setting suit for this card it
+	 * is also validationg object of suit for
+	 * implementing SuitInterface, each of suit
+	 * classes must implements SuitInterface
+	 * method is returning object of this card
+	 * so you can use method chaining
+	 * 
+	 * @access	public
+	 * @param	object	$oSuit	Object of suit
+	 * @return	object	Object of card
+	 * @throws	PHPCardsException
+	 */
+	public function setSuit($oSuit);
+	
+// --------------------------------------------------------------------
+	
+	/**
+	 * Method getSuit();
+	 * 
+	 * Method is returning object of suit for
+	 * this card, it can be object or null
+	 * Deck class is validating each card for
+	 * having suit, so don't worry about that 
+	 * 
+	 * @access	public
+	 * @return	object	Object of suit
+	 */
+	public function getSuit();
+	
+// --------------------------------------------------------------------
 	
 	/**
 	 * Method setPoints();
@@ -36,7 +70,7 @@ interface CardInterface {
 	 * @param	integer	$iPoints	Points for this card
 	 * @return	object	Object of card class
 	 */
-	public function setPoints();
+	public function setPoints($iPoints);
 	
 // --------------------------------------------------------------------
 	
