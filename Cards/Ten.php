@@ -12,7 +12,7 @@ use PHPCards\Interfaces\SuitInterface;
 use PHPCards\Exceptions\PHPCardsException;
 
 /**
- * Class Ace
+ * Class Ten
  * 
  * This class is describing one of cards, you can 
  * find here information about this card, and you 
@@ -27,13 +27,13 @@ use PHPCards\Exceptions\PHPCardsException;
  * @since		01.01.2013
  * @version		1.0 <01.01.2013>
  */
-class Ace implements CardInterface
+class Ten implements CardInterface
 {	
 	/**
 	 * Amount of points for this card
 	 * @var	integer
 	 */
-	protected $_sPoints = 11;
+	protected $_sPoints = 10;
 	
 	/**
 	 * The suit of card (Spade, Club, Heart or Diamond)
@@ -93,9 +93,7 @@ class Ace implements CardInterface
 	 * Method is setting new value of points
 	 * for this card, the new value is juggling
 	 * to integer type, becouse points can be
-	 * only integer values, method is returning
-	 * object of this card, so you can use method
-	 * chaining here
+	 * only integer values
 	 * 
 	 * @access	public
 	 * @param	integer	$iPoints	Points for this card
@@ -126,4 +124,4 @@ class Ace implements CardInterface
 		return (int)$this->sPoints;
 	}//end of getPoints() method
 	
-}//end of Ace Class
+}//end of Ten Class
