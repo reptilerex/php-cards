@@ -23,7 +23,58 @@ namespace PHPCards\Interfaces;
  * @version		1.0 <01.01.2013>
  */
 interface CardInterface
-{		
+{
+	/**
+	 * Method __toString();
+	 * 
+	 * Method is presenting object as string
+	 * it gets clean class name and name of
+	 * suit, which that card using and then it
+	 * is making string with "-" separator, so 
+	 * it can return for example Ace-Club or
+	 * King-Spade, Nine-Heart etc, if suit is
+	 * not defined it can return only card name
+	 * for example Ace, King, Nine, Ten etc
+	 * 
+	 * @access	public
+	 * @return	string	Class presented by string
+	 */
+	public function __toString();
+	
+// --------------------------------------------------------------------
+	
+	/**
+	 * Method getSuitName();
+	 * 
+	 * Method is juggling suit object to string
+	 * so it uses __toString() method to get a
+	 * name of selected suit for this card, if
+	 * suit is not defined, method will return
+	 * empty string value
+	 * 
+	 * @access	public
+	 * @return	string	Suit name
+	 */
+	public function getSuitName();
+	
+// --------------------------------------------------------------------
+	
+	/**
+	 * Method getCardName();
+	 * 
+	 * Method is returning clean class name
+	 * without namespace, it is creating an
+	 * array by explode string by "\" and
+	 * then it is returning last element of
+	 * array, it will be clean class name
+	 * 
+	 * @access	public
+	 * @return	string	Name of class
+	 */
+	public function getCardName();
+	
+// --------------------------------------------------------------------
+	
 	/**
 	 * Method setSuit();
 	 * 
