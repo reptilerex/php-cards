@@ -1,5 +1,8 @@
-PHPCards is still in development
+PHPCards Framework
+---------------
 
-It will be full OOP framework to creating card games in PHP <-> Ajax
+Project is still in development
 
-Greetings ;)
+It will be **Full OOP framework to creating card games in PHP <-> Ajax**
+
+Greetings :-)
