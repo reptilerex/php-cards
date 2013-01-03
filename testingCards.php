@@ -77,8 +77,15 @@ $oDeck->shuffle();
 $oDeck->dealCards(7, $oPlayerOne);
 $oDeck->dealCards(7, $oPlayerTwo);
 
+$oPlayerOne->sortCards();
+
+die;
+
 echo "Cards of Player One: \n\n";
 print_r($oPlayerOne->getCards());
 
 echo "\n\n Cards of Player Two: \n\n";
 print_r($oPlayerTwo->getCards());
+
+$fUsedMemory = round(memory_get_usage()/1024, 2);
+echo "\n\n Memory used: $fUsedMemory KB\n";
