@@ -6,5 +6,5 @@ namespace PHPCards\Exceptions;
 
 class PHPCardsException extends \Exception
 {
-	
+    
 }
