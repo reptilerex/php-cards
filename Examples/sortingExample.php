@@ -16,7 +16,7 @@ use PHPCards\Player;
 use PHPCards\Deck;
 
 // Autoloading
-$sPath = dirname(__FILE__).DIRECTORY_SEPARATOR;
+$sPath = dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR;
 include_once($sPath.'autoload.php');
 
 // Aces
@@ -55,7 +55,6 @@ $oKingDiamond = new King();     $oKingDiamond->setSuit(new Diamond());
 $oKingSpade = new King();       $oKingSpade->setSuit(new Spade());
 $oKingClub = new King();        $oKingClub->setSuit(new Club());
 
-
 // Make players
 $oPlayerOne = new Player();
 $oPlayerTwo = new Player();
@@ -77,20 +76,15 @@ $iCardsInDeck = $oDeck->getCardsAmount();
 // Shuffle it !
 $oDeck->shuffle();
 
-// Gave 10 cards to both players
+// Gave 8 cards to all players
 $oDeck->dealCards(8, $oPlayerOne);
 $oDeck->dealCards(8, $oPlayerTwo);
 $oDeck->dealCards(8, $oPlayerThree);
 
-// Sorting players cards as you play "Thousand" game
+// Sorting players cards
 $oPlayerOne->sortCardsBySuits();
 $oPlayerTwo->sortCardsByPoints();
 $oPlayerThree->sortCardsBySuitsAndPoints();
-
-// Get player cards
-$aPlayerOneCards = $oPlayerOne->getCards();
-$aPlayerTwoCards = $oPlayerTwo->getCards();
-$aPlayerThreeCards = $oPlayerThree->getCards();
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,21 +114,21 @@ $aPlayerThreeCards = $oPlayerThree->getCards();
             There are 3 players, <?php echo $iCardsInDeck; ?> cards in deck, each of player took 8 cards.<br />
             
             <h2>Player 1 sorted his cards by suits</h2>
-            <?php foreach ($aPlayerOneCards as $oCard): ?>
+            <?php foreach ($oPlayerOne->getCards() as $oCard): ?>
                 <?php $sCardName = (string)$oCard; ?>
-                <img src="Images/<?php echo $sCardName ?>.png" alt="<?php echo $sCardName ?>" />
+                <img src="../Images/<?php echo $sCardName ?>.png" alt="<?php echo $sCardName ?>" />
             <?php endforeach; ?>
 
             <h2>Player 2 sorted his cards by points</h2>
-            <?php foreach ($aPlayerTwoCards as $oCard): ?>
+            <?php foreach ($oPlayerTwo->getCards() as $oCard): ?>
                 <?php $sCardName = (string)$oCard; ?>
-                <img src="Images/<?php echo $sCardName ?>.png" alt="<?php echo $sCardName ?>" />
+                <img src="../Images/<?php echo $sCardName ?>.png" alt="<?php echo $sCardName ?>" />
             <?php endforeach; ?>
                 
             <h2>Player 3 sorted his cards by suits and points</h2>
-            <?php foreach ($aPlayerThreeCards as $oCard): ?>
+            <?php foreach ($oPlayerThree->getCards() as $oCard): ?>
                 <?php $sCardName = (string)$oCard; ?>
-                <img src="Images/<?php echo $sCardName ?>.png" alt="<?php echo $sCardName ?>" />
+                <img src="../Images/<?php echo $sCardName ?>.png" alt="<?php echo $sCardName ?>" />
             <?php endforeach; ?><br /><br />
                 
             <input type="button" onclick="location.reload(true)" value="Shuffle !" />
