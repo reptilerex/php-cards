@@ -16,7 +16,7 @@
 function phpCardsAutoloader($sClass)
 {
     $sBase = dirname(__FILE__).DIRECTORY_SEPARATOR;
-    $aSearch = array('PHPCards', '\\');
+    $aSearch = array('PHPCards\\', '\\');
     $aReplace = array('', DIRECTORY_SEPARATOR);
     
     $sPath = str_replace($aSearch, $aReplace, $sClass).'.php';
