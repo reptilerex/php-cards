@@ -78,7 +78,17 @@ $oDeck->dealCards(7, $oPlayerOne);
 $oDeck->dealCards(7, $oPlayerTwo);
 
 // Sorting player one cards as you play "Thousand" game
-$oPlayerOne->sortCards();
+$oPlayerOne->sortCardsBySuitsAndPoints();
+
+$aPlayerOneCards = $oPlayerOne->getCards();
+
+foreach ($aPlayerOneCards as $oCard) {
+    $sCardName = (string)$oCard;
+    echo '<img src="Images/'.$sCardName.'.png" alt="'.$sCardName.'" /> ';
+}
+
+die('Scirpt was killed by die();');
+
 
 echo "Cards of Player One: \n\n";
 print_r($oPlayerOne->getCards());
