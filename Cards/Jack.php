@@ -33,7 +33,7 @@ class Jack implements CardInterface
      * Amount of points for this card
      * @var integer
      */
-    protected $_sPoints = 11;
+    protected $_sPoints = 2;
     
     /**
      * The suit of card (Spade, Club, Heart or Diamond)
@@ -87,6 +87,28 @@ class Jack implements CardInterface
 // --------------------------------------------------------------------
     
     /**
+     * Method getSuitPrioritySorting();
+     * 
+     * Method is returning priority level of
+     * sorting, it is very required if player 
+     * can sort his cards, you can decide which 
+     * suit have priority in sorting, so for 
+     * example you can set  sorting to Heart Spade, 
+     * Diamond, Club or whatever you want, it is 
+     * user-friendly becouse, suits should be 
+     * separated (red-black-red-black)
+     * 
+     * @access  public
+     * @return  integer Priority of sorting level
+     */
+    public function getSuitPrioritySorting()
+    {
+        return $this->_oSuit->getPrioritySort();
+    }//end of getSuitPrioritySorting() method
+    
+// --------------------------------------------------------------------
+    
+    /**
      * Method getCardName();
      * 
      * Method is returning clean class name
@@ -100,7 +122,8 @@ class Jack implements CardInterface
      */
     public function getCardName()
     {
-        return array_pop(explode('\\', __CLASS__));
+        $aNames = explode('\\', __CLASS__);
+        return array_pop($aNames);
     }//end of getCardName() method
     
 // --------------------------------------------------------------------
@@ -185,7 +208,7 @@ class Jack implements CardInterface
      */
     public function getPoints()
     {
-        return (int)$this->sPoints;
+        return (int)$this->_sPoints;
     }//end of getPoints() method
     
 }//end of Jack Class
