@@ -20,7 +20,7 @@ class Deck
     protected $_aCards = array();
     
     /**
-     * Deck shuffled state
+     * Deck shuffling state
      * @var boolean
      */
     protected $bShuffled = false;
