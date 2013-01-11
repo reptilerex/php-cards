@@ -9,7 +9,7 @@ namespace PHPCards\Cards;
  */
 use PHPCards\Interfaces\CardInterface;
 use PHPCards\Interfaces\SuitInterface;
-use PHPCards\Exceptions\PHPCardsException;
+use PHPCards\Exceptions\PHPCardsInterfaceException;
 
 /**
  * Class King
@@ -19,7 +19,12 @@ use PHPCards\Exceptions\PHPCardsException;
  * can use it to perform some actions, each card 
  * is presented as separate class and object, so
  * it is very simillar to real life, just use your
- * imagination and be more creative
+ * imagination and be more creative, each of card
+ * could have points and suit, also we can get
+ * name of card using __toString() method, card
+ * name is name of card class + name of suit if
+ * it is defined, all of cards should implements 
+ * CardInterface
  * 
  * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
  * @category    Cards
@@ -141,12 +146,12 @@ class King implements CardInterface
      * @access  public
      * @param   object  $oSuit  Object of suit
      * @return  object  Object of card
-     * @throws  PHPCardsException
+     * @throws  PHPCardsInterfaceException
      */
     public function setSuit($oSuit)
     {
         if (!$oSuit instanceof SuitInterface) {
-            throw new PHPCardsException('Suit must implements SuitInterface');
+            throw new PHPCardsInterfaceException('Suit must implements SuitInterface');
         }
         $this->_oSuit = $oSuit;
         return $this;

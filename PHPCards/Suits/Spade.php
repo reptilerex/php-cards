@@ -2,10 +2,43 @@
 /**
  * Namespace declaration
  */
-namespace PHPCards\Interfaces;
+namespace PHPCards\Suits;
 
-interface SuitInterface
-{    
+/**
+ * Using namespaces
+ */
+use PHPCards\Interfaces\SuitInterface;
+
+/**
+ * Class Spade
+ * 
+ * This class is describing one of suits, you can 
+ * find here information about this suit, and you 
+ * can use it to perform some actions, each suit 
+ * is presented as separate class and object, so
+ * it is very simillar to real life, just use your
+ * imagination and be more creative, each of suit
+ * have unique name, also you can set priority of
+ * sorting for each of suits, you can get name of 
+ * suit using __toString() method, all of suits
+ * should implements SuitInterface
+ * 
+ * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
+ * @category    Cards
+ * @package     php-cards
+ * @since       02.01.2013
+ * @version     1.0 <01.01.2013>
+ */
+class Spade implements SuitInterface
+{
+    /**
+     * Priority in sorting by suits
+     * @var integer
+     */
+    protected $_iPrioritySort = 2;
+    
+// --------------------------------------------------------------------
+    
     /**
      * Method __toString();
      * 
@@ -15,12 +48,16 @@ interface SuitInterface
      * then it is returning last element of
      * array, it will be clean class name
      * so it can return for example Heart,
-     * Club, Spade or Diamond
+     * Spade, Spade or Diamond
      * 
      * @access  public
      * @return  string  Class presented by string
      */
-    public function __toString();
+    public function __toString()
+    {
+        $aNames = explode('\\', __CLASS__);
+        return array_pop($aNames);
+    }//end of __toString() method
     
 // --------------------------------------------------------------------
     
@@ -39,7 +76,11 @@ interface SuitInterface
      * @param   integer $iPriority  New priority of sorting
      * @return  object  Object of suit
      */
-    public function setPrioritySort($iPriority);
+    public function setPrioritySort($iPriority)
+    {
+        $this->_iPrioritySort = (int)$iPriority;
+        return $this;
+    }//end of setPrioritySort() method
       
 // --------------------------------------------------------------------
     
@@ -60,6 +101,9 @@ interface SuitInterface
      * @access  public
      * @return  integer Priority of sorting level
      */
-    public function getPrioritySort();
+    public function getPrioritySort()
+    {
+        return $this->_iPrioritySort;
+    }//end of getPrioritySort() method
     
-}//end of SuitInterface
+}//end of Spade Class

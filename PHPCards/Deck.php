@@ -8,7 +8,7 @@ namespace PHPCards;
  * Using namespaces
  */
 use PHPCards\Interfaces\CardInterface;
-use PHPCards\Exceptions\PHPCardsException;
+use PHPCards\Exceptions\PHPCardsInterfaceException;
 use PHPCards\Player;
 
 class Deck
@@ -23,7 +23,7 @@ class Deck
      * Deck shuffling state
      * @var boolean
      */
-    protected $bShuffled = false;
+    protected $_bShuffled = false;
     
 // --------------------------------------------------------------------
     
@@ -40,18 +40,21 @@ class Deck
      * 
      * @access  public
      * @return  void
-     * @throws  PHPCardsException
+     * @throws  PHPCardsInterfaceException
      */
     public function __construct()
     {
         foreach (func_get_args() as $oCard) {
             if (!$oCard instanceof CardInterface) {
-                throw new PHPCardsException('Card must implements CardInterface');
+                throw new PHPCardsInterfaceException('Card must implements CardInterface');
             }
-            if (!$oCard->getSuit() === null) {
+            if ($oCard->getSuit() === null) {
                 throw new PHPCardsException('Card does not have suit defined');
             }
             $this->_aCards[] = $oCard;
+        } 
+        if (empty($this->_aCards)) {
+            throw new PHPCardsException('Deck of cards cannot be empty');
         }
     }//end of __construct() method
     
@@ -81,11 +84,8 @@ class Deck
         if ($this->_bShuffled === false) {
             throw new PHPCardsException('You must shuffle cards before dealing it');
         }
-        if (!is_object($oPlayer) || !method_exists($oPlayer, 'setCards')) {
-            throw new PHPCardsException('Invalid player object');
-        }
         if ($this->getCardsAmount() < $iCards) {
-            throw new PHPCardsException('You cannot give more cards than is in deck');
+            throw new PHPCardsException('You cannot give more cards than are in deck');
         }
         
         $aCards = array();

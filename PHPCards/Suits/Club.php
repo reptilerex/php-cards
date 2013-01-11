@@ -9,13 +9,33 @@ namespace PHPCards\Suits;
  */
 use PHPCards\Interfaces\SuitInterface;
 
-class Diamond implements SuitInterface
+/**
+ * Class Club
+ * 
+ * This class is describing one of suits, you can 
+ * find here information about this suit, and you 
+ * can use it to perform some actions, each suit 
+ * is presented as separate class and object, so
+ * it is very simillar to real life, just use your
+ * imagination and be more creative, each of suit
+ * have unique name, also you can set priority of
+ * sorting for each of suits, you can get name of 
+ * suit using __toString() method, all of suits
+ * should implements SuitInterface
+ * 
+ * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
+ * @category    Cards
+ * @package     php-cards
+ * @since       02.01.2013
+ * @version     1.0 <01.01.2013>
+ */
+class Club implements SuitInterface
 {
     /**
      * Priority in sorting by suits
      * @var integer
      */
-    protected $_iPrioritySort = 3;
+    protected $_iPrioritySort = 4;
     
 // --------------------------------------------------------------------
     
@@ -28,7 +48,7 @@ class Diamond implements SuitInterface
      * then it is returning last element of
      * array, it will be clean class name
      * so it can return for example Heart,
-     * Diamond, Spade or Diamond
+     * Club, Spade or Diamond
      * 
      * @access  public
      * @return  string  Class presented by string
@@ -48,7 +68,7 @@ class Diamond implements SuitInterface
      * sorting by suits, you can decide which
      * suit have priority in sorting, so for
      * example you can set sorting to Heart
-     * Spade, Diamond, Diamond or whatever you
+     * Spade, Diamond, Club or whatever you
      * want, it is user-friendly becouse, suits
      * should be separated (red-black-red-black)
      * 
@@ -73,7 +93,7 @@ class Diamond implements SuitInterface
      * required if player can sort his cards
      * you can decide which suit have priority 
      * in sorting, so for example you can set 
-     * sorting to Heart Spade, Diamond, Diamond 
+     * sorting to Heart Spade, Diamond, Club 
      * Or whatever you want, it is user-friendly 
      * becouse, suits should be separated 
      * (red-black-red-black)
@@ -86,4 +106,4 @@ class Diamond implements SuitInterface
         return $this->_iPrioritySort;
     }//end of getPrioritySort() method
     
-}//end of Diamond Class
+}//end of Club Class

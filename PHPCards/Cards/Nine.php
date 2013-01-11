@@ -9,17 +9,22 @@ namespace PHPCards\Cards;
  */
 use PHPCards\Interfaces\CardInterface;
 use PHPCards\Interfaces\SuitInterface;
-use PHPCards\Exceptions\PHPCardsException;
+use PHPCards\Exceptions\PHPCardsInterfaceException;
 
 /**
- * Class Jack
+ * Class Nine
  * 
  * This class is describing one of cards, you can 
  * find here information about this card, and you 
  * can use it to perform some actions, each card 
  * is presented as separate class and object, so
  * it is very simillar to real life, just use your
- * imagination and be more creative
+ * imagination and be more creative, each of card
+ * could have points and suit, also we can get
+ * name of card using __toString() method, card
+ * name is name of card class + name of suit if
+ * it is defined, all of cards should implements 
+ * CardInterface
  * 
  * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
  * @category    Cards
@@ -27,13 +32,13 @@ use PHPCards\Exceptions\PHPCardsException;
  * @since       01.01.2013
  * @version     1.0 <01.01.2013>
  */
-class Jack implements CardInterface
+class Nine implements CardInterface
 {    
     /**
      * Amount of points for this card
      * @var integer
      */
-    protected $_sPoints = 2;
+    protected $_sPoints = 0;
     
     /**
      * The suit of card (Spade, Club, Heart or Diamond)
@@ -50,10 +55,10 @@ class Jack implements CardInterface
      * it gets clean class name and name of
      * suit, which that card using and then it
      * is making string with "-" separator, so 
-     * it can return for example Jack-Club or
+     * it can return for example Nine-Club or
      * King-Spade, Nine-Heart etc, if suit is
      * not defined it can return only card name
-     * for example Jack, King, Nine, Ten etc
+     * for example Nine, King, Nine, Ten etc
      * 
      * @access  public
      * @return  string  Class presented by string
@@ -141,12 +146,12 @@ class Jack implements CardInterface
      * @access  public
      * @param   object  $oSuit  Object of suit
      * @return  object  Object of card
-     * @throws  PHPCardsException
+     * @throws  PHPCardsInterfaceException
      */
     public function setSuit($oSuit)
     {
         if (!$oSuit instanceof SuitInterface) {
-            throw new PHPCardsException('Suit must implements SuitInterface');
+            throw new PHPCardsInterfaceException('Suit must implements SuitInterface');
         }
         $this->_oSuit = $oSuit;
         return $this;
@@ -211,4 +216,4 @@ class Jack implements CardInterface
         return (int)$this->_sPoints;
     }//end of getPoints() method
     
-}//end of Jack Class
+}//end of Nine Class

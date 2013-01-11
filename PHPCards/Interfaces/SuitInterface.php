@@ -2,23 +2,28 @@
 /**
  * Namespace declaration
  */
-namespace PHPCards\Suits;
+namespace PHPCards\Interfaces;
 
 /**
- * Using namespaces
+ * SuitInterface
+ * 
+ * Each of suit classes must implements this
+ * Suit classes are very simillar, and you
+ * can describing all of them in the same
+ * way, so that is a reason to use interface
+ * all of suits have colour, all of them have
+ * unique symbol, and very very more examples
+ * just use your mind and make each of suits
+ * implementing this interface
+ * 
+ * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
+ * @category    Interfaces
+ * @package     php-cards
+ * @since       01.01.2013
+ * @version     1.0 <01.01.2013>
  */
-use PHPCards\Interfaces\SuitInterface;
-
-class Club implements SuitInterface
-{
-    /**
-     * Priority in sorting by suits
-     * @var integer
-     */
-    protected $_iPrioritySort = 4;
-    
-// --------------------------------------------------------------------
-    
+interface SuitInterface
+{    
     /**
      * Method __toString();
      * 
@@ -33,11 +38,7 @@ class Club implements SuitInterface
      * @access  public
      * @return  string  Class presented by string
      */
-    public function __toString()
-    {
-        $aNames = explode('\\', __CLASS__);
-        return array_pop($aNames);
-    }//end of __toString() method
+    public function __toString();
     
 // --------------------------------------------------------------------
     
@@ -48,7 +49,7 @@ class Club implements SuitInterface
      * sorting by suits, you can decide which
      * suit have priority in sorting, so for
      * example you can set sorting to Heart
-     * Spade, Diamond, Club or whatever you
+     * Spade, Diamond, Spade or whatever you
      * want, it is user-friendly becouse, suits
      * should be separated (red-black-red-black)
      * 
@@ -56,11 +57,7 @@ class Club implements SuitInterface
      * @param   integer $iPriority  New priority of sorting
      * @return  object  Object of suit
      */
-    public function setPrioritySort($iPriority)
-    {
-        $this->_iPrioritySort = (int)$iPriority;
-        return $this;
-    }//end of setPrioritySort() method
+    public function setPrioritySort($iPriority);
       
 // --------------------------------------------------------------------
     
@@ -73,7 +70,7 @@ class Club implements SuitInterface
      * required if player can sort his cards
      * you can decide which suit have priority 
      * in sorting, so for example you can set 
-     * sorting to Heart Spade, Diamond, Club 
+     * sorting to Heart Spade, Diamond, Spade 
      * Or whatever you want, it is user-friendly 
      * becouse, suits should be separated 
      * (red-black-red-black)
@@ -81,9 +78,6 @@ class Club implements SuitInterface
      * @access  public
      * @return  integer Priority of sorting level
      */
-    public function getPrioritySort()
-    {
-        return $this->_iPrioritySort;
-    }//end of getPrioritySort() method
+    public function getPrioritySort();
     
-}//end of Club Class
+}//end of SuitInterface
