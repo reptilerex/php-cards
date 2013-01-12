@@ -4,13 +4,68 @@
  */
 namespace PHPCards;
 
+/**
+ * Using namespaces
+ */
+use PHPCards\Exceptions\PHPCardsException;
+use PHPCards\Table;
+
+/**
+ * Class Player
+ * 
+ * This class is describing player in game, you
+ * can use it to sort player cards by suits, by
+ * points or by suit and points, you can also
+ * get player cards and put card on a table, if
+ * you are creating object of player, he will
+ * get his unique identifier made by ip, user
+ * agent and some random values, it could be
+ * useful, this class should behave like a one 
+ * of real player
+ * 
+ * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
+ * @category    Main
+ * @package     php-cards
+ * @since       03.01.2013
+ * @version     1.0 <02.01.2013>
+ */
 class Player
-{    
+{
     /**
      * An array of player cards
      * @var array
      */
     protected $_aCards = array();
+    
+    /**
+     * Player unique identifier
+     * @var string
+     */
+    protected $_sIdentifier = null;
+    
+// --------------------------------------------------------------------
+    
+    /**
+     * Method __construct();
+     * 
+     * Method is creating player identifier it
+     * is sha256 hash made by player IP address
+     * and by his browser user agent, it is also
+     * microtime added to make it more randomize
+     * the value is storing into protected field
+     * in player class, you can access to it by
+     * getIdentifier method
+     * 
+     * @access  public
+     * @return  void
+     */
+    public function __construct()
+    {
+        $sIpAddress = $_SERVER['REMOTE_ADDR'];
+        $sUserAgent = $_SERVER['HTTP_USER_AGENT'];
+        $sString = microtime().'|'.$sUserAgent.'|'.$sIpAddress.'|'.mt_rand();
+        $this->_sIdentifier = hash('sha256', $sString);
+    }//end of __construct() method
     
 // --------------------------------------------------------------------
     
@@ -51,6 +106,56 @@ class Player
     {
         return $this->_aCards;
     }//end of getCards() method
+    
+// --------------------------------------------------------------------
+    
+    /**
+     * Method putOnTable();
+     * 
+     * Method is putting selected card on table
+     * it needs integer value to set player card
+     * and object of table where the card should
+     * be put, if there aren't card on position
+     * which you set the exception will be thrown
+     * after putting card on table, selected card
+     * is removing from player cards, at the end
+     * method is returning object of player
+     * 
+     * @access  public
+     * @param   integer $iPosition  Card position
+     * @param   object  $oTable Object of table
+     * @return  object  Object of player
+     * @throws  PHPCardsException
+     */
+    public function putOnTable($iPosition, Table $oTable)
+    {
+        if (!isset($this->_aCards[$iPosition])) {
+            throw new PHPCardsException('There aren\'t any card on '.$iPosition.' position');
+        }
+        
+        $oTable->put($this->_aCards[$iPosition], $this);
+        unset($this->_aCards[$iPosition]);
+        return $this;
+    }//end of putOnTable() method
+    
+// --------------------------------------------------------------------
+    
+    /**
+     * Method getIdentifier();
+     * 
+     * Method is returning unique for player
+     * identifier, it was made by construct
+     * using user agent, ip address and also
+     * microtime, it could be usefull to set
+     * player properly
+     * 
+     * @access  public
+     * @return  string
+     */
+    public function getIdentifier()
+    {
+        return $this->_sIdentifier;
+    }//end of getIdentifier() method
     
 // --------------------------------------------------------------------
     
