@@ -7,7 +7,7 @@ namespace PHPCards;
 /**
  * Using namespaces
  */
-use PHPCards\Exceptions\PHPCardsException;
+use PHPCards\Exceptions\PHPCardsPlayerException;
 use PHPCards\Table;
 
 /**
@@ -38,7 +38,8 @@ class Player
     protected $_aCards = array();
     
     /**
-     * Player unique identifier
+     * Player unique identifier it is using to serializing
+     * so the serialized value is random for each player
      * @var string
      */
     protected $_sIdentifier = null;
@@ -63,8 +64,8 @@ class Player
     {
         $sIpAddress = $_SERVER['REMOTE_ADDR'];
         $sUserAgent = $_SERVER['HTTP_USER_AGENT'];
-        $sString = microtime().'|'.$sUserAgent.'|'.$sIpAddress.'|'.mt_rand();
-        $this->_sIdentifier = hash('sha256', $sString);
+        $sString = (microtime().'|'.$sUserAgent.'|'.$sIpAddress.'|'.mt_rand());
+        $this->_sIdentifier = hash('sha512', $sString);
     }//end of __construct() method
     
 // --------------------------------------------------------------------
@@ -125,12 +126,12 @@ class Player
      * @param   integer $iPosition  Card position
      * @param   object  $oTable Object of table
      * @return  object  Object of player
-     * @throws  PHPCardsException
+     * @throws  PHPCardsPlayerException
      */
     public function putOnTable($iPosition, Table $oTable)
     {
         if (!isset($this->_aCards[$iPosition])) {
-            throw new PHPCardsException('There aren\'t any card on '.$iPosition.' position');
+            throw new PHPCardsPlayerException('There aren\'t any card on '.$iPosition.' position');
         }
         
         $oTable->put($this->_aCards[$iPosition], $this);
@@ -154,8 +155,31 @@ class Player
      */
     public function getIdentifier()
     {
-        return $this->_sIdentifier;
+        return base64_encode(serialize($this));
     }//end of getIdentifier() method
+    
+// --------------------------------------------------------------------
+    
+    /**
+     * Method bid();
+     * 
+     * Method is setting new player bid into an
+     * array which is protected property of class
+     * setting value must be numeric, if not an
+     * exception will thrown, biddings are sorted
+     * by player so you can easily get it, it is
+     * returning object of player class
+     * 
+     * @access  public
+     * @param   float   $fValue     Value of player bid
+     * @param   object  $oBidding   Object of bidding class
+     * @return  object  Object of plaryer class
+     */
+    public function bid($fValue, Bidding $oBidding)
+    {
+        $oBidding->setBid($fValue, $this);
+        return $this;
+    }//end of bid() method
     
 // --------------------------------------------------------------------
     

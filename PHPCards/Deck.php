@@ -9,8 +9,29 @@ namespace PHPCards;
  */
 use PHPCards\Interfaces\CardInterface;
 use PHPCards\Exceptions\PHPCardsInterfaceException;
+use PHPCards\Exceptions\PHPCardsDeckException;
 use PHPCards\Player;
 
+/**
+ * Class Deck
+ * 
+ * This class is describing deck of cards, you
+ * can use it just like you are using deck in
+ * real life, you can shuffle it, deal cards to
+ * players, count how many cards are in deck.
+ * To create object of this class you must have
+ * objects of cards created, then you can call
+ * deck construct with object of cards as his
+ * parameters, each of card must implements
+ * CardInterface and each of card must have
+ * suit defined
+ * 
+ * @author      Maciej Strączkowski <m.straczkowski@gmail.com>
+ * @category    Main
+ * @package     php-cards
+ * @since       02.01.2013
+ * @version     1.0 <02.01.2013>
+ */
 class Deck
 {
     /**
@@ -40,7 +61,7 @@ class Deck
      * 
      * @access  public
      * @return  void
-     * @throws  PHPCardsInterfaceException
+     * @throws  PHPCardsInterfaceException, PHPCardsDeckException
      */
     public function __construct()
     {
@@ -49,12 +70,12 @@ class Deck
                 throw new PHPCardsInterfaceException('Card must implements CardInterface');
             }
             if ($oCard->getSuit() === null) {
-                throw new PHPCardsException('Card does not have suit defined');
+                throw new PHPCardsDeckException('Card does not have suit defined');
             }
             $this->_aCards[] = $oCard;
         } 
         if (empty($this->_aCards)) {
-            throw new PHPCardsException('Deck of cards cannot be empty');
+            throw new PHPCardsDeckException('Deck of cards cannot be empty');
         }
     }//end of __construct() method
     
@@ -77,15 +98,15 @@ class Deck
      * @param   integer $iCards How many cards to give
      * @param   object  $oPlayer    Object of player
      * @return  object  Object of deck
-     * @throws  PHPCardsException
+     * @throws  PHPCardsDeckException
      */
     public function dealCards($iCards, Player $oPlayer)
     {
         if ($this->_bShuffled === false) {
-            throw new PHPCardsException('You must shuffle cards before dealing it');
+            throw new PHPCardsDeckException('You must shuffle cards before dealing it');
         }
         if ($this->getCardsAmount() < $iCards) {
-            throw new PHPCardsException('You cannot give more cards than are in deck');
+            throw new PHPCardsDeckException('You cannot give more cards than are in deck');
         }
         
         $aCards = array();
