@@ -133,7 +133,6 @@ class Player
         if (!isset($this->_aCards[$iPosition])) {
             throw new PHPCardsPlayerException('There aren\'t any card on '.$iPosition.' position');
         }
-        
         $oTable->put($this->_aCards[$iPosition], $this);
         unset($this->_aCards[$iPosition]);
         return $this;
@@ -157,29 +156,6 @@ class Player
     {
         return base64_encode(serialize($this));
     }//end of getIdentifier() method
-    
-// --------------------------------------------------------------------
-    
-    /**
-     * Method bid();
-     * 
-     * Method is setting new player bid into an
-     * array which is protected property of class
-     * setting value must be numeric, if not an
-     * exception will thrown, biddings are sorted
-     * by player so you can easily get it, it is
-     * returning object of player class
-     * 
-     * @access  public
-     * @param   float   $fValue     Value of player bid
-     * @param   object  $oBidding   Object of bidding class
-     * @return  object  Object of plaryer class
-     */
-    public function bid($fValue, Bidding $oBidding)
-    {
-        $oBidding->setBid($fValue, $this);
-        return $this;
-    }//end of bid() method
     
 // --------------------------------------------------------------------
     

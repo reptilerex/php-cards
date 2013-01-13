@@ -74,20 +74,19 @@ class Table
      * 
      * Method is returning player cards putted
      * on a table, if there aren't any cards
-     * from this player the exception is thrown
-     * cards are sorted by players so you can
-     * easly get player cards
+     * from this player the empty array will
+     * return, cards are sorted by players so 
+     * you can easily get player cards
      * 
      * @access  public
      * @param   object  $oPlayer    Player object
      * @return  array   Array with card objects
-     * @throws  PHPCardsTableException
      */
     public function getPlayerCards(Player $oPlayer)
     {
         $sPlayerId = $oPlayer->getIdentifier();
         if (!isset($this->_aCards[$sPlayerId])) {
-            throw PHPCardsTableException('There aren\'t any cards on table from this player');
+            return array();
         }
         return $this->_aCards[$sPlayerId];
     }//end of getCardsByPlayer() method
