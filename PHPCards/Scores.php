@@ -49,18 +49,18 @@ class Scores
      * it not an exception will thrown
      * 
      * @access  public
-     * @param   integer $iScore     New score of player
+     * @param   float   $fScore     New score of player
      * @param   object  $oPlayer    Object of player
      * @return  object  Object of scores class
      * @throws  PHPCardsScoresException
      */
-    public function setPlayerScore($iScore, Player $oPlayer)
+    public function setPlayerScore($fScore, Player $oPlayer)
     {
-        if (!is_numeric($iScore)) {
+        if (!is_numeric($fScore)) {
             throw new PHPCardsScoresException('Score must be numeric value');
         }
         $sPlayerId = $oPlayer->getIdentifier();
-        $this->_aScores[$sPlayerId] = $iScore;
+        $this->_aScores[$sPlayerId] = $fScore;
         return $this;
     }//end of setPlayerScore() method
     
@@ -79,21 +79,21 @@ class Scores
      * instead of summing it
      * 
      * @access  public
-     * @param   integer $iScore     Score of player
+     * @param   float   $fScore     Score of player
      * @param   object  $oPlayer    Object of player
      * @return  object  Object of scores class
      * @throws  PHPCardsScoresException
      */
-    public function addScore($iScore, Player $oPlayer)
+    public function addScore($fScore, Player $oPlayer)
     {
-        if (!is_numeric($iScore)) {
+        if (!is_numeric($fScore)) {
             throw new PHPCardsScoresException('Score must be numeric value');
         }
         $sPlayerId = $oPlayer->getIdentifier();
         if (!isset($this->_aScores[$sPlayerId])) {
-            return $this->setPlayerScore($iScore, $oPlayer);
+            return $this->setPlayerScore($fScore, $oPlayer);
         }
-        $this->_aScores[$sPlayerId] += $iScore;
+        $this->_aScores[$sPlayerId] += $fScore;
         return $this;
     }//end of addScore() method
     
@@ -112,21 +112,21 @@ class Scores
      * player will have minus score
      * 
      * @access  public
-     * @param   integer $iScore     Score of player
+     * @param   float   $fScore     Score of player
      * @param   object  $oPlayer    Object of player
      * @return  object  Object of scores class
      * @throws  PHPCardsScoresException
      */
-    public function subScore($iScore, Player $oPlayer)
+    public function subScore($fScore, Player $oPlayer)
     {
-        if (!is_numeric($iScore)) {
+        if (!is_numeric($fScore)) {
             throw new PHPCardsScoresException('Score must be numeric value');
         }
         $sPlayerId = $oPlayer->getIdentifier();
         if (!isset($this->_aScores[$sPlayerId])) {
             $this->_aScores[$sPlayerId] = 0;
         }
-        $this->_aScores[$sPlayerId] -= $iScore;
+        $this->_aScores[$sPlayerId] -= $fScore;
         return $this;
     }//end of subScore() method
     
@@ -144,7 +144,7 @@ class Scores
      * 
      * @access  public
      * @param   object  $oPlayer    Player object
-     * @return  integer
+     * @return  float
      */
     public function getPlayerScore(Player $oPlayer)
     {
@@ -152,7 +152,7 @@ class Scores
         if (isset($this->_aScores[$sPlayerId])) {
             return $this->_aScores[$sPlayerId];
         }
-        return 0;
+        return 0.00;
     }//end of setPlayerScore() method
     
 // --------------------------------------------------------------------

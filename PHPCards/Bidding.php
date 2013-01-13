@@ -53,15 +53,20 @@ class Bidding
      * @access  public
      * @param   float   $fValue     PLayer bid
      * @param   object  $oPlayer    Player object
+     * @param   object  $oScores    Object of scores where you are storing player money
      * @return  object  Object of bidding class
      * @throws  PHPCardsBiddingException
      */
-    public function setBid($fValue, Player $oPlayer)
+    public function setBid($fValue, Player $oPlayer, Scores $oMoney)
     {
+        $fPlayerMoney = $oMoney->getPlayerScore($oPlayer);
         if (!is_numeric($fValue)) {
             throw new PHPCardsBiddingException('The bid must be a numeric value');
         }
-        
+        if ($fValue > $fPlayerMoney) {
+            throw new PHPCardsBiddingException('The bid can\'t be greater than money of player');
+        }
+       
         $sPlayerId = $oPlayer->getIdentifier();
         $this->_aBiddings[$sPlayerId][] = $fValue;
         return $this;
