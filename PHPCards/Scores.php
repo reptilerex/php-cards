@@ -8,6 +8,7 @@ namespace PHPCards;
  * Using namespaces
  */
 use PHPCards\Exceptions\PHPCardsScoresException;
+use PHPCards\Player;
 
 /**
  * Class Scores
