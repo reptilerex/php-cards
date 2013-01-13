@@ -146,12 +146,12 @@ class Ace implements CardInterface
      * @access  public
      * @param   object  $oSuit  Object of suit
      * @return  object  Object of card
-     * @throws  PHPCardsInterfaceException
+     * @throws  PHPCardsCardException
      */
     public function setSuit($oSuit)
     {
         if (!$oSuit instanceof SuitInterface) {
-            throw new PHPCardsInterfaceException('Suit must implements SuitInterface');
+            throw new PHPCardsCardException('Suit must implements SuitInterface');
         }
         $this->_oSuit = $oSuit;
         return $this;
