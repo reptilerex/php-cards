@@ -175,7 +175,7 @@ class Scores
     public function getTheBestPlayer()
     {
         $aScores = $this->_aScores;
-        asort($aScores);
+        arsort($aScores);
         $aPlayers = array_keys($aScores);
         if (isset($aPlayers[0])) {
             return unserialize(base64_decode($aPlayers[0]));

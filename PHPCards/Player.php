@@ -50,7 +50,7 @@ class Player
      * Method __construct();
      * 
      * Method is creating player identifier it
-     * is sha256 hash made by player IP address
+     * is sha512 hash made by player IP address
      * and by his browser user agent, it is also
      * microtime added to make it more randomize
      * the value is storing into protected field
@@ -64,7 +64,7 @@ class Player
     {
         $sIpAddress = $_SERVER['REMOTE_ADDR'];
         $sUserAgent = $_SERVER['HTTP_USER_AGENT'];
-        $sString = (microtime().'|'.$sUserAgent.'|'.$sIpAddress.'|'.mt_rand());
+        $sString = (uniqid().'|'.$sUserAgent.'|'.$sIpAddress.'|'.mt_rand());
         $this->_sIdentifier = hash('sha512', $sString);
     }//end of __construct() method
     

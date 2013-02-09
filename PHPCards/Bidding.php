@@ -91,7 +91,7 @@ class Bidding
     {
         $fTheBest = 0.00;
         foreach ($this->_aBiddings as $aBiddings) {
-            asort($aBiddings);
+            arsort($aBiddings);
             if ($aBiddings[0] > $fTheBest) {
                 $fTheBest = $aBiddings[0];
             }
@@ -119,7 +119,7 @@ class Bidding
         $oPlayer = null;
         $fTheBest = 0.00;
         foreach ($this->_aBiddings as $sPlayer => $aBiddings) {
-            asort($aBiddings);
+            arsort($aBiddings);
             if ($aBiddings[0] > $fTheBest) {
                 $oPlayer = unserialize(base64_decode($sPlayer));
                 $fTheBest = $aBiddings[0];

@@ -7,8 +7,9 @@ namespace PHPCards;
 /**
  * Using namespaces
  */
-use PHPCards\Exceptions\PHPCardsTableException;
 use PHPCards\Exceptions\PHPCardsInterfaceException;
+use PHPCards\Interfaces\CardInterface;
+use PHPCards\Player;
 
 /**
  * Class Table
