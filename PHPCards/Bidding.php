@@ -8,6 +8,7 @@ namespace PHPCards;
  * Using namespaces
  */
 use PHPCards\Exceptions\PHPCardsBiddingException;
+use PHPCards\Player;
 
 /**
  * Class Bidding
