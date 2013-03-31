@@ -9,7 +9,7 @@ $fStart = microtime(true);
  * is very simple to make a work easier
  * it is replaceing "\" to actual directory 
  * separator PHPCards are PSR-0 friendly so 
- * it is very simple to implement
+ * it is very simple to implement ;)
  * 
  * @param   string  $sClass Class to load
  * @return  void
